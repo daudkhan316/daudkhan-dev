@@ -1,0 +1,145 @@
+---
+const navLinks = [
+  { num: '01', name: 'About', href: '/#about' },
+  { num: '02', name: 'Experience', href: '/#experience' },
+  { num: '03', name: 'Projects', href: '/#projects' },
+  { num: '04', name: 'Writing', href: '/writing' },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 z-30 w-full px-6 lg:px-12 transition-all duration-200 ease-in-out backdrop-blur-md bg-navy/85 h-[var(--nav-height)] flex items-center"
+>
+  <nav class="w-full flex items-center justify-between font-mono text-smish text-light-slate">
+    <a href="/" aria-label="home" class="block">
+      <span
+        class="inline-flex items-center justify-center w-10 h-10 border-2 border-green text-green font-bold text-md hover:-translate-y-0.5 transition-transform duration-200 ease-out"
+        style="border-radius: 6px;"
+      >
+        DK
+      </span>
+    </a>
+
+    <ol class="hidden md:flex items-center gap-8 list-none m-0 p-0">
+      {navLinks.map((link, i) => (
+        <li>
+          <a
+            href={link.href}
+            class="hover:text-green transition-colors duration-200"
+          >
+            <span class="text-green mr-1">{link.num}.</span>
+            {link.name}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href="https://www.linkedin.com/in/daudkhan316"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fancy-button !py-2 !px-4 !text-xs"
+        >
+          LinkedIn
+        </a>
+      </li>
+    </ol>
+
+    <button
+      id="menu-button"
+      type="button"
+      class="md:hidden text-green"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<aside
+  id="mobile-menu"
+  class="md:hidden fixed inset-y-0 right-0 z-40 w-3/4 max-w-xs bg-light-navy translate-x-full transition-transform duration-300 ease-in-out shadow-2xl"
+  aria-hidden="true"
+>
+  <div class="flex justify-end p-6">
+    <button id="menu-close" type="button" class="text-green" aria-label="Close menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18" />
+        <line x1="6" y1="18" x2="18" y2="6" />
+      </svg>
+    </button>
+  </div>
+  <nav class="px-8 pb-8">
+    <ol class="flex flex-col gap-8 list-none m-0 p-0 text-center font-mono">
+      {navLinks.map((link) => (
+        <li>
+          <a href={link.href} class="text-lightest-slate hover:text-green text-lg block">
+            <span class="text-green block text-xs mb-1">{link.num}.</span>
+            {link.name}
+          </a>
+        </li>
+      ))}
+      <li class="pt-4">
+        <a
+          href="https://www.linkedin.com/in/daudkhan316"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fancy-button"
+        >
+          LinkedIn
+        </a>
+      </li>
+    </ol>
+  </nav>
+</aside>
+
+<script>
+  const header = document.getElementById('site-header');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const cur = window.scrollY;
+    if (!header) return;
+    if (cur > 100) {
+      header.classList.add('shadow-xl');
+      header.style.height = 'var(--nav-scroll-height)';
+    } else {
+      header.classList.remove('shadow-xl');
+      header.style.height = 'var(--nav-height)';
+    }
+    if (cur > lastScroll && cur > 100) {
+      header.style.transform = 'translateY(-100%)';
+    } else {
+      header.style.transform = 'translateY(0)';
+    }
+    lastScroll = cur;
+  });
+
+  const menuBtn = document.getElementById('menu-button');
+  const menuClose = document.getElementById('menu-close');
+  const menu = document.getElementById('mobile-menu');
+
+  function openMenu() {
+    if (!menu || !menuBtn) return;
+    menu.classList.remove('translate-x-full');
+    menu.setAttribute('aria-hidden', 'false');
+    menuBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    if (!menu || !menuBtn) return;
+    menu.classList.add('translate-x-full');
+    menu.setAttribute('aria-hidden', 'true');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  menuBtn?.addEventListener('click', openMenu);
+  menuClose?.addEventListener('click', closeMenu);
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+</script>
