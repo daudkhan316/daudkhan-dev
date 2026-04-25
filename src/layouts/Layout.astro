@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Daud Khan — Senior Software Engineer',
+  description = 'Senior Software Engineer focused on Angular, TypeScript, RxJS, and agentic AI workflows. Based in Berlin, working remote.',
+  ogImage = '/og.png',
+  canonical = Astro.url.href,
+} = Astro.props;
+
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="627" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Daud Khan — Senior Software Engineer. Angular, TypeScript, RxJS, Node.js. Berlin, Remote Worldwide." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='12'%20fill='%2364ffda'/%3E%3Ctext%20x='50%25'%20y='50%25'%20font-family='-apple-system,BlinkMacSystemFont,Segoe%20UI,Roboto,sans-serif'%20font-size='30'%20font-weight='700'%20fill='%230a192f'%20text-anchor='middle'%20dominant-baseline='central'%3EDK%3C/text%3E%3C/svg%3E" />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

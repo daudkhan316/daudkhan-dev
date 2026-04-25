@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import SocialSidebar from '../components/SocialSidebar.astro';
+import EmailSidebar from '../components/EmailSidebar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Header />
+  <SocialSidebar />
+  <EmailSidebar />
+  <main class="lg:px-24 pt-[var(--nav-height)]">
+    <Hero />
+    <About />
+    <Experience />
+    <Projects />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

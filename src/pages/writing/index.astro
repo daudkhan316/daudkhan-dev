@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import SocialSidebar from '../../components/SocialSidebar.astro';
+import EmailSidebar from '../../components/EmailSidebar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Writing — Daud Khan"
+  description="Notes on Angular, TypeScript, agentic AI workflows, and shipping software with Claude Code."
+>
+  <Header />
+  <SocialSidebar />
+  <EmailSidebar />
+
+  <main class="lg:px-24 pt-[var(--nav-height)] min-h-screen">
+    <section class="py-24 px-6 lg:px-12 max-w-3xl mx-auto">
+      <p class="font-mono text-green text-md mb-3">Writing</p>
+      <h1 class="text-lightest-slate text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+        Notes from the dev loop.
+      </h1>
+      <p class="text-slate text-md leading-relaxed mb-12 max-w-2xl">
+        Long-form writing on modern Angular, agentic AI workflows, and the
+        day-to-day of shipping software with Claude Code.
+      </p>
+
+      <div class="bg-light-navy border border-lightest-navy rounded p-8 text-center" style="border-radius: 4px;">
+        <p class="font-mono text-green text-sm mb-2">Coming soon</p>
+        <p class="text-light-slate m-0">
+          The first posts will land here. In the meantime, follow along on
+          <a
+            href="https://www.linkedin.com/in/daudkhan316"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-link"
+          >
+            LinkedIn
+          </a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

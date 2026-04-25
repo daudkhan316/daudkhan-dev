@@ -1,0 +1,69 @@
+---
+const skills = [
+  'Angular (v15–v20)',
+  'TypeScript',
+  'RxJS',
+  'Signals & Standalone',
+  'Node.js',
+  'Java / Spring Boot',
+  'Claude Code',
+  'Tailwind CSS',
+];
+---
+
+<section
+  id="about"
+  class="py-24 px-6 lg:px-12 max-w-5xl mx-auto scroll-mt-24"
+>
+  <h2 class="numbered-heading">About Me</h2>
+
+  <div class="grid md:grid-cols-[3fr_2fr] gap-12 items-start">
+    <div class="text-slate space-y-4 leading-relaxed">
+      <p>
+        Hello, I'm Daud — a Senior Software Engineer at
+        <a href="https://www.klaus-versichert.de" target="_blank" rel="noopener noreferrer" class="inline-link">Klaus versichert GmbH</a>
+        in Berlin, where I build customer-facing insurance products with
+        Angular, TypeScript, and RxJS.
+      </p>
+      <p>
+        I write about modern Angular — signals, standalone components, the
+        new control flow — and about the day-to-day reality of shipping
+        software with agentic AI tools like Claude Code. Most of my recent
+        engineering work is less about hand-writing code and more about
+        designing the skills, scripts, and orchestration that let agents do
+        the implementation.
+      </p>
+      <p>
+        On the side, I'm building
+        <span class="text-lightest-slate">Alpha Platform</span> — a
+        social-publishing automation tool that orchestrates content across
+        Instagram, TikTok, LinkedIn, Pinterest, and YouTube. Spring Boot
+        backend, Angular frontend, Claude doing the content generation.
+      </p>
+      <p>Here are a few technologies I've been working with recently:</p>
+      <ul class="grid grid-cols-2 gap-x-4 gap-y-1 mt-4 list-none p-0 font-mono text-xs">
+        {skills.map((s) => (
+          <li class="flex items-start gap-2 before:content-['▸'] before:text-green before:text-sm before:relative before:-top-px">
+            {s}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="relative group max-w-xs mx-auto md:mx-0 w-full">
+      <div class="relative aspect-square">
+        <div class="absolute inset-0 bg-green rounded translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300 ease-in-out-cubic" style="border-radius: 4px;"></div>
+        <div
+          class="absolute inset-0 bg-green/20 group-hover:bg-transparent transition-colors duration-300 z-10 mix-blend-screen rounded"
+          style="border-radius: 4px;"
+        ></div>
+        <div
+          class="absolute inset-0 bg-light-navy flex items-center justify-center rounded border-2 border-green group-hover:translate-x-[-4px] group-hover:translate-y-[-4px] transition-transform duration-300 ease-in-out-cubic"
+          style="border-radius: 4px;"
+        >
+          <span class="font-mono text-green text-5xl font-bold tracking-tighter">DK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

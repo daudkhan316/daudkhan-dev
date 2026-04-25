@@ -1,0 +1,166 @@
+---
+const jobs = [
+  {
+    id: 'klaus-senior',
+    company: 'Klaus versichert',
+    role: 'Senior Software Engineer',
+    employer: 'Klaus versichert GmbH',
+    employerUrl: 'https://www.klaus-versichert.de',
+    range: 'Jan 2025 – Present',
+    bullets: [
+      'Led the migration of a large-scale customer-facing insurance SaaS platform from Angular 17 to Angular 20, adopting Signals, standalone components, modern control flow (@if / @for / @switch), and inject()-based DI',
+      'Collaborate closely with Java / Spring Boot backend teams to design robust API contracts and ensure type-safe, end-to-end data flow',
+      'Drive engineering quality through code reviews, mentoring 4 junior developers, and establishing frontend standards (linting, commit conventions, PR checklists, and review practices)',
+      'Introduced and operationalized an agent-driven development workflow using Claude Code — building custom skills, scripts, and orchestration agents, shifting focus from manual coding to architecture, validation, and technical direction',
+    ],
+  },
+  {
+    id: 'klaus-fe',
+    company: 'Klaus versichert',
+    role: 'Frontend Web Developer',
+    employer: 'Klaus versichert GmbH',
+    employerUrl: 'https://www.klaus-versichert.de',
+    range: 'Jan 2023 – Dec 2024',
+    bullets: [
+      'Developed and maintained a customer-facing insurance SaaS platform using Angular, TypeScript, and RxJS',
+      'Improved user engagement by 25% and reduced initial load time by 30% through UX enhancements, route-level code splitting, lazy loading, and image optimization',
+      'Engineered complex multi-step insurance application flows with robust reactive form validation and autosave capabilities',
+      'Designed and built a reusable component library to standardize UI patterns and accelerate feature development across the platform',
+      'Integrated with Java / Spring Boot backend services for customer data management, policy retrieval, and payment processing',
+    ],
+  },
+];
+---
+
+<section
+  id="experience"
+  class="py-24 px-6 lg:px-12 max-w-4xl mx-auto scroll-mt-24"
+>
+  <h2 class="numbered-heading">Where I've Worked</h2>
+
+  <div class="grid md:grid-cols-[max-content_1fr] gap-x-2 md:gap-x-8 gap-y-6">
+    <div
+      role="tablist"
+      aria-label="Job tabs"
+      class="flex md:flex-col overflow-x-auto md:overflow-visible relative font-mono text-smish"
+      data-tablist
+    >
+      <span
+        class="hidden md:block absolute left-0 top-0 w-0.5 h-10 bg-green transition-transform duration-300 ease-in-out-cubic z-10"
+        data-tab-indicator
+      ></span>
+      <span
+        class="md:hidden absolute bottom-0 left-0 h-0.5 w-24 bg-green transition-transform duration-300 ease-in-out-cubic z-10"
+        data-tab-indicator-mobile
+      ></span>
+
+      {jobs.map((job, i) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          aria-controls={`panel-${job.id}`}
+          id={`tab-${job.id}`}
+          data-tab
+          data-target={job.id}
+          tabindex={i === 0 ? 0 : -1}
+          class="text-left py-2 px-4 md:px-5 border-b-2 md:border-b-0 md:border-l-2 border-lightest-navy hover:bg-light-navy hover:text-green transition-colors duration-200 whitespace-nowrap data-[active=true]:text-green"
+          data-active={i === 0 ? 'true' : 'false'}
+        >
+          {job.company}
+        </button>
+      ))}
+    </div>
+
+    <div class="min-h-[340px]">
+      {jobs.map((job, i) => (
+        <div
+          id={`panel-${job.id}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${job.id}`}
+          data-panel
+          data-id={job.id}
+          hidden={i !== 0}
+        >
+          <h3 class="text-lightest-slate text-xl font-medium mb-1">
+            <span>{job.role}</span>
+            <span class="text-green ml-1">@&nbsp;
+              <a
+                href={job.employerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-link"
+              >
+                {job.employer}
+              </a>
+            </span>
+          </h3>
+          <p class="font-mono text-smish text-light-slate mb-5">{job.range}</p>
+          <ul class="list-none p-0 m-0 space-y-3">
+            {job.bullets.map((b) => (
+              <li class="relative pl-6 text-slate before:content-['▸'] before:absolute before:left-0 before:top-0 before:text-green">
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-panel]');
+  const indicator = document.querySelector<HTMLElement>('[data-tab-indicator]');
+  const indicatorMobile = document.querySelector<HTMLElement>('[data-tab-indicator-mobile]');
+
+  function activate(id: string, focus = false) {
+    tabs.forEach((tab) => {
+      const isActive = tab.dataset.target === id;
+      tab.setAttribute('aria-selected', String(isActive));
+      tab.setAttribute('data-active', String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
+      if (isActive && focus) tab.focus();
+    });
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.id !== id;
+    });
+    moveIndicator();
+  }
+
+  function moveIndicator() {
+    const active = document.querySelector<HTMLButtonElement>('[data-tab][data-active="true"]');
+    if (!active) return;
+    if (indicator) {
+      const tabHeight = active.offsetHeight;
+      const tabTop = active.offsetTop;
+      indicator.style.height = `${tabHeight}px`;
+      indicator.style.transform = `translateY(${tabTop}px)`;
+    }
+    if (indicatorMobile) {
+      const tabWidth = active.offsetWidth;
+      const tabLeft = active.offsetLeft;
+      indicatorMobile.style.width = `${tabWidth}px`;
+      indicatorMobile.style.transform = `translateX(${tabLeft}px)`;
+    }
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => activate(tab.dataset.target!));
+    tab.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        const next = tabs[(i + 1) % tabs.length];
+        activate(next.dataset.target!, true);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const prev = tabs[(i - 1 + tabs.length) % tabs.length];
+        activate(prev.dataset.target!, true);
+      }
+    });
+  });
+
+  window.addEventListener('load', moveIndicator);
+  window.addEventListener('resize', moveIndicator);
+</script>

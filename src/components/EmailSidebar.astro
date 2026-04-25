@@ -1,0 +1,15 @@
+---
+const email = 'daudkhan316@gmail.com';
+---
+
+<aside class="hidden lg:block fixed bottom-0 right-10 z-10 w-10">
+  <div class="flex flex-col items-center gap-5 after:content-[''] after:block after:w-px after:h-24 after:mt-5 after:bg-light-slate">
+    <a
+      href={`mailto:${email}`}
+      class="text-light-slate hover:text-green hover:-translate-y-1 inline-block font-mono text-xs tracking-widest transition-all duration-200"
+      style="writing-mode: vertical-rl;"
+    >
+      {email}
+    </a>
+  </div>
+</aside>
